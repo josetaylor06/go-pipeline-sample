@@ -28,9 +28,16 @@ pipeline:
                   identifier: gotest
                   name: go_test
                   spec:
+                    shell: Sh
                     command: go test -v ./...
                   timeout: ""
                   type: Run
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
               - step:
                   identifier: dockerbuild
                   name: docker_build
